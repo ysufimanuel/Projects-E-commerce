@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Ratings</title>
+  <link rel="stylesheet" href="css/rate's admin.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h3>Dashboard Rating – Admin</h3>
+  <div class="btns">
+    <a href="admin.html" class="back">← Kembali</a>
+  </div>
+</header>
+  
+<main class="container">
+    <button id="clearAll" class="danger">Hapus Semua</button>
+</main>
+  
+<main class="container">
+  <section id="ratingsList" class="ratings-list"></section>
+</main>
+
+<script>
+(function(){
+  function readRatings(){
+    const raw = localStorage.getItem("ratings");
+    return raw ? JSON.parse(raw) : [];
+  }
+
+  function saveRatings(arr){
+    localStorage.setItem("ratings", JSON.stringify(arr));
+  }
+
+  function renderStars(n){
+    let html = "";
+    for(let i=1;i<=5;i++){
+      html += `<span class="star ${i<=n?'filled':''}">★</span>`;
+    }
+    return html;
+  }
+
+  function render(){
+    const arr = readRatings();
+    const list = document.getElementById("ratingsList");
+
+    if(arr.length === 0){
+      list.innerHTML = `<div class="empty">Tidak ada data rating.</div>`;
+      return;
+    }
+
+    list.innerHTML = arr.map(item => `
+      <div class="rating-card">
+        <div>
+          <strong>${item.name}</strong><br>
+          <div class="stars">${renderStars(item.rating)}</div>
+          <p>${item.message}</p>
+        </div>
+        <button class="delete" data-id="${item.id}">Hapus</button>
+      </div>
+    `).join("");
+  }
+
+  // Hapus satu rating
+  document.addEventListener("click", e=>{
+    if(e.target.classList.contains("delete")){
+      const id = Number(e.target.dataset.id);
+      let arr = readRatings();
+      arr = arr.filter(r => r.id !== id);
+      saveRatings(arr);
+      render();
+    }
+  });
+
+  // Hapus semua rating
+  document.getElementById("clearAll").onclick = ()=>{
+    if(confirm("Hapus semua rating?")){
+      saveRatings([]);
+      render();
+    }
+  };
+
+  render();
+})();
+</script>
+
+</body>
+</html>

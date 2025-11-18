@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pesanan Pelanggan</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="img/restaurant.png" alt="logo" class="logo">
+      <div>
+        <h1>Cetak Struk</h1>
+        <small>Panel Rincian & Cetak</small>
+      </div>
+    </div>
+    <a class="btn" href="rate's admin.html">Cek Ratting</a>
+  </header>
+
+  <main class="container admin-container">
+    <section>
+      <h2>Pesanan Tersimpan</h2>
+      <div id="rincianPesanan" class="rincianPesanan">
+        <p class="muted">Belum ada pesanan.</p>
+      </div>
+
+      <div class="admin-actions">
+        <button onclick="cetakPDF()">Cetak Semua Pesanan ke PDF</button>
+        <button class="secondary" onclick="resetTotal()">Hapus Semua Pesanan</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

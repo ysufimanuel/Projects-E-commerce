@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pessanan</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img src="img/restaurant.png" alt="logo" class="logo">
+      <div>
+        <h1>Warung Makan & Penginapan Mas Amba </h1>
+      </div>
+    </div>
+    <a class="btn" href="contact.html" >Kasih Ratting</a>
+  </header>
+
+  <main class="container">
+    <section class="left-col">
+      <h2>Daftar Menu</h2>
+      <div id="menuNames" class="menu-names"></div>
+
+      <h2 style="margin-top:22px">Pilihan Kamar</h2>
+      <div id="roomList" class="room-list"></div>
+    </section>
+
+    <aside class="right-col" id="cartCol">
+      <h3>Keranjang</h3>
+      <div id="cartList" class="cart-list">
+        <p class="muted">Keranjang kosong.</p>
+      </div>
+
+      <div class="cart-summary">
+        <div class="total-row">Total: <strong>Rp <span id="cartTotal">0</span></strong></div>
+        <div class="cart-actions">
+          <button onclick="simpanPesanan()">Simpan Pesanan</button>
+          <button class="secondary" onclick="kosongkanKeranjang()">Kosongkan</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Popup detail (makanan & kamar) -->
+  <div class="detail-popup" id="popup">
+    <div class="popup-content">
+      <button class="close" onclick="tutupPopup()">×</button>
+      <img id="popupImg" src="" alt="gambar" />
+      <h2 id="popupNama"></h2>
+      <p id="popupDesc" class="muted"></p>
+      <p id="popupHarga" class="price"></p>
+
+      <label for="popupJumlah">Jumlah:</label>
+      <input type="number" id="popupJumlah" min="1" value="1" />
+
+      <div class="popup-actions">
+        <button onclick="tambahKeKeranjang()">Tambah ke Keranjang</button>
+        <button class="secondary" onclick="tutupPopup()">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>© Warung & Penginapan Nusantara — Demo</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
