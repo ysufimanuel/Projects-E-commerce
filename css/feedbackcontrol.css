@@ -1,0 +1,83 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+.topbar {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.btns {
+  display: flex;
+  gap: 10px;
+  background: green;
+  color: white;
+  padding: 3px 4px;
+  border: mone;
+  border-radius: 6px;
+}
+
+.back {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+.danger {
+  display: block;
+  margin: 0 auto;
+  background: #e74c3c;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.rating-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stars .star {
+  font-size: 20px;
+  color: #ddd;
+}
+
+.stars .star.filled {
+  color: #f5b700;
+}
+
+.delete {
+  background: #e84118;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.empty {
+  padding: 20px;
+  text-align: center;
+  background: white;
+  border-radius: 10px;
+}
