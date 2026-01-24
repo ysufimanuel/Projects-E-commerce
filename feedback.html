@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact Us - Foodie Delight</title>
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a class="btn2" href="fooddelivery.html">Menu</a>
+    
+    <div class="logo">
+      <img src="img/restaurant.png" alt="logo" />
+      <h2>Foodie Delight</h2>
+    </div>
+  </header>
+
+  <!-- Title -->
+  <section class="contact-title">
+    <h1>Contact Us</h1>
+    <p>We’d love to hear from you!</p>
+  </section>
+
+  <!-- Form -->
+  <main class="container">
+    <section class="form-section">
+      <form id="contactForm">
+        <label>Full Name</label>
+        <input id="name" type="text" placeholder="Your full name" required>
+
+        <label>Email Address</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
+
+        <label>Message</label>
+        <textarea id="message" rows="5" placeholder="Write your message..."></textarea>
+
+        <!-- Rating stars -->
+        <label>Rating</label>
+        <div class="star-rating" id="starRating" aria-label="Rating (1 to 5)">
+          <!-- buttons so accessible -->
+          <button type="button" class="star" data-value="1" aria-label="1 star">★</button>
+          <button type="button" class="star" data-value="2" aria-label="2 stars">★</button>
+          <button type="button" class="star" data-value="3" aria-label="3 stars">★</button>
+          <button type="button" class="star" data-value="4" aria-label="4 stars">★</button>
+          <button type="button" class="star" data-value="5" aria-label="5 stars">★</button>
+        </div>
+
+        <div class="form-actions">
+          <button id="sendBtn" type="submit" class="btn">Send Message</button>
+          <a class="link-secondary" href="feedbackreview.html">Lihat Rating Pelanggan</a>
+        </div>
+      </form>
+    </section>
+
+    <!-- Info box (right/bottom) -->
+    <aside class="info-box">
+      <h3>Get In Touch</h3>
+      <p>📍 Food Street, Bogor City</p>
+      <p>📞 (123) 456-7890</p>
+      <a href="https://instagram.com/redpleased">✉️ instagram</a>
+
+      <h3>Opening Hours</h3>
+      <p>Monday – Friday: 10:00 AM – 10:00 PM</p>
+      <p>Saturday – Sunday: 11:00 AM – 11:00 PM</p>
+    </aside>
+  </main>
+
+<script>
+/* ====== Rating UI & form handling ====== */
+(function(){
+  const stars = document.querySelectorAll('#starRating .star');
+  let currentRating = 5; // default 5
+  // initialize visual (default all outlined -> we'll fill default 0, but set to 5 for UX: change if you prefer 0)
+  function paint(r){
+    stars.forEach(s => {
+      const v = Number(s.dataset.value);
+      s.classList.toggle('filled', v <= r);
+    });
+  }
+  paint(currentRating);
+
+  stars.forEach(s => {
+    s.addEventListener('click', () => {
+      currentRating = Number(s.dataset.value);
+      paint(currentRating);
+    });
+    s.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        currentRating = Number(s.dataset.value);
+        paint(currentRating);
+      }
+    });
+  });
+
+  // form submit -> push to localStorage array 'ratings'
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    const entry = {
+      id: Date.now(),
+      name,
+      email,
+      message,
+      rating: currentRating,
+      createdAt: new Date().toISOString()
+    };
+
+    // read existing
+    const raw = localStorage.getItem('ratings');
+    const arr = raw ? JSON.parse(raw) : [];
+    arr.unshift(entry); // newest first
+    localStorage.setItem('ratings', JSON.stringify(arr));
+
+    // simple UX: reset form + confirm
+    form.reset();
+    currentRating = 5;
+    paint(currentRating);
+    alert('Terima kasih! Rating dan pesan Anda telah tersimpan.');
+  });
+})();
+</script>
+
+</body>
+</html>
